@@ -5,4 +5,4 @@ const {
   OMDB_API_URL  
 } = config;
 
-export const getMoviesByTitle = () => `${OMDB_API_URL}?apiKey=${API_KEY}&t=`
+export const getMoviesByTitle = () => `${OMDB_API_URL}?apiKey=${API_KEY}&s=`
