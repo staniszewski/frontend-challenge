@@ -1,27 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
-import './components/SearchPage/SearchPage'
-import SearchPage from './components/SearchPage/SearchPage';
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <SearchPage/>
-    </div>
-  );
+import MainPage from './components/MainPage/MainPage';
+import SearchResults from './components/SearchResults/SearchResults';
+import {
+  Router,
+  Route,
+  Redirect,
+  browserHistory
+} from 'react-router';
+const App = () => { 
+ return (
+  <>
+    <Router history={browserHistory} >
+      <Route path="/" component={MainPage} />
+      <Route path="/search" component={SearchResults} />
+      <Redirect from="*" to="/" />
+    </Router>
+  </>
+ )
 }
 
 export default App;
