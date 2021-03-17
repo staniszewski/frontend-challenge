@@ -5,15 +5,18 @@ import {
   Router,
   Route,
   Redirect,
-  browserHistory
+  Switch
 } from 'react-router';
+import history from './config/history'
 const App = () => { 
  return (
   <>
-    <Router history={browserHistory} >
-      <Route path="/" component={MainPage} />
-      <Route path="/search" component={SearchResults} />
-      <Redirect from="*" to="/" />
+    <Router history={history} >
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+        <Route exact path="/search" component={SearchResults} />
+        <Redirect from="*" to="/" />
+      </Switch>
     </Router>
   </>
  )
