@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, {useState, useContext } from 'react';
 import history from '../../config/history'
 import { AppContext } from '../Store/Store';
 import DispatchActions from '../Store/DispatchActions';
@@ -7,6 +7,7 @@ const { UPDATE_SEARCH_VALUE } = DispatchActions;
 
 const SearchBar = () => { 
   const [state, dispatch]= useContext(AppContext);
+  const [searchTerm, setSearchTerm] = useState(state.search.searchValue);
   const onChange = event => setSearchTerm(event.target.value)
   const onKeyDown = event => {
     if(event.key === 'Enter') {      
@@ -24,6 +25,7 @@ const SearchBar = () => {
       <input title='What are you looking for?' 
         onChange={event=> onChange(event)}
         onKeyDown={event => onKeyDown(event)}
+        value={searchTerm}
       >
       </input>
     </div>
