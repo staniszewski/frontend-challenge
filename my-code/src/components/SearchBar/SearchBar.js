@@ -1,19 +1,33 @@
-import React, {useState} from 'react';
+import React, { useContext } from 'react';
 import history from '../../config/history'
-const SearchBar = () => { 
-  const [searchInput, setSearchInput] = useState('');
-  const getSearchInput = event => setSearchInput(event.target.value);
-  console.log(searchInput)
+import { AppContext } from '../Store/Store';
+import DispatchActions from '../Store/DispatchActions';
 
+const { UPDATE_SEARCH_VALUE } = DispatchActions;
+
+const SearchBar = () => { 
+  const [state, dispatch]= useContext(AppContext);
+  const onChange = event => setSearchTerm(event.target.value)
   const onKeyDown = event => {
-    if(event.key === 'Enter') {
+    if(event.key === 'Enter') {      
       history.push({
         pathname:'/search',
-        search: `?title=${searchInput}`
+        search: `?title=${searchTerm}`
       })
+      event.preventDefault();
+      dispatch({type: UPDATE_SEARCH_VALUE, payload: searchTerm})
     }
   }
-  return <div className='search-bar'><input title='What are you looking for?' onKeyDown={event => onKeyDown(event)} onChange={event => getSearchInput(event)}></input></div>
+
+  return (
+    <div className='search-bar'>
+      <input title='What are you looking for?' 
+        onChange={event=> onChange(event)}
+        onKeyDown={event => onKeyDown(event)}
+      >
+      </input>
+    </div>
+  )
 }
 
 export default SearchBar;
